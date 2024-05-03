@@ -27,8 +27,8 @@ public class EmpController {
     public ResponseResult getList(
             String name,
             Integer gender,
-            Date startTime,
-            Date endTime,
+            Long startTime,
+            Long endTime,
             @NotNull Integer page,
             @NotNull Integer pageSize) {
         return empService.getList(name,gender,startTime,endTime,page,pageSize);

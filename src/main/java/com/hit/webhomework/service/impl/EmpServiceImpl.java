@@ -1,6 +1,7 @@
 package com.hit.webhomework.service.impl;
 
 import cn.hutool.core.util.StrUtil;
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.conditions.query.LambdaQueryChainWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
@@ -30,14 +31,18 @@ public class EmpServiceImpl extends ServiceImpl<EmpMapper, Emp>
     implements EmpService{
 
     @Override
-    public ResponseResult getList(String name, Integer gender, Date startTime, Date endTime, Integer page, Integer pageSize) {
-        LambdaQueryChainWrapper<Emp> queryChainWrapper = new LambdaQueryChainWrapper<>(baseMapper)
-                .like(!StrUtil.isBlankIfStr(name), Emp::getName, name)
-                .eq(Objects.nonNull(gender), Emp::getGender, gender)
-                .gt(Objects.nonNull(startTime), Emp::getEntrydate, startTime)
-                .lt(Objects.nonNull(endTime), Emp::getEntrydate, endTime);
+    public ResponseResult getList(String name, Integer gender, Long startTime, Long endTime, Integer page, Integer pageSize) {
+        LambdaQueryWrapper<Emp> queryWrapper = new LambdaQueryWrapper<>();
+        queryWrapper.like(StrUtil.isNotBlank(name), Emp::getName, name)
+                .eq(Objects.nonNull(gender),Emp::getGender, gender);
+        if (startTime != null) {
+            queryWrapper.ge(Emp::getCreateTime, new Date(startTime));
+        }
+        if (endTime != null) {
+            queryWrapper.le(Emp::getCreateTime, new Date(endTime));
+        }
         Page<Emp> page1 = new Page<>(page, pageSize);
-        page(page1, queryChainWrapper);
+        page(page1, queryWrapper);
         PageResponse pageResponse = new PageResponse(page1.getRecords(), page1.getTotal());
         return ResponseResult.ok(pageResponse);
     }
