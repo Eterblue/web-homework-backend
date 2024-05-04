@@ -1,15 +1,17 @@
 package com.hit.webhomework.controller;
 
+import cn.hutool.core.convert.Convert;
 import com.hit.webhomework.domain.ResponseResult;
 import com.hit.webhomework.domain.entity.Dept;
 import com.hit.webhomework.domain.entity.Emp;
-import com.hit.webhomework.domain.request.AddDeptRequest;
-import com.hit.webhomework.domain.request.AddEmpRequest;
-import com.hit.webhomework.domain.request.UpdateDeptRequest;
-import com.hit.webhomework.domain.request.UpdateEmpRequest;
+import com.hit.webhomework.domain.request.*;
 import com.hit.webhomework.service.DeptService;
 import com.hit.webhomework.service.EmpService;
 import com.hit.webhomework.utils.BeanCopyUtils;
+import com.hit.webhomework.utils.JwtUtils;
+import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.Jws;
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.constraints.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
@@ -22,6 +24,14 @@ import java.util.Date;
 public class EmpController {
     @Autowired
     private EmpService empService;
+
+    @GetMapping("/myinfo")
+    public ResponseResult myinfo(HttpServletRequest request) {
+        String token = request.getHeader("token");
+        Object o = JwtUtils.parsePayload(token).get("id");
+        Integer id = Integer.valueOf(o.toString());
+        return ResponseResult.ok(empService.getById(id));
+    }
 
     @GetMapping
     public ResponseResult getList(

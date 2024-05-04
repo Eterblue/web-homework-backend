@@ -23,14 +23,14 @@ public class JwtUtils {
     //密钥
     private static final SecretKey KEY = Keys.hmacShaKeyFor(SECRET_KEY.getBytes());
 
-    public static String getToken(Object subject) {
+    public static String getToken(String id) {
         return Jwts.builder()
                 .header()//头信息
                 .add("typ", "JWT")
                 .add("alg", "HS256")
                 .and()
+                .claim("id", id)
                 .id(String.valueOf(IdUtil.simpleUUID()))//标识id
-                .subject(JSONUtil.toJsonStr(subject))//主体
                 .expiration(Date.from(Instant.now().plusSeconds(EXPIRE)))//过期时间
                 .issuedAt(new Date())//签发时间
                 .issuer("xy")//签发者
@@ -55,9 +55,9 @@ public class JwtUtils {
                 .parseSignedClaims(token);
     }
 
-    public static Object parseSubject(String token) {
-        return parsePayload(token).get("sub");
-    }
+//    public static Object parseSubject(String token) {
+//        return parsePayload(token).get("sub");
+//    }
 
     public static JwsHeader parseHeader(String token) {
         return parseClaim(token).getHeader();

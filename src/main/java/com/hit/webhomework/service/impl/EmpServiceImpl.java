@@ -54,8 +54,8 @@ public class EmpServiceImpl extends ServiceImpl<EmpMapper, Emp>
         List<Emp> list = new LambdaQueryChainWrapper<>(baseMapper).eq(Emp::getUsername, username).eq(Emp::getPassword, password).list();
         if (!list.isEmpty()) {
             Emp emp = list.get(0);
-            String token = JwtUtils.getToken(emp);
-            LoginResponse loginResponse = new LoginResponse(username, token);
+            String token = JwtUtils.getToken(emp.getId() + "");
+            LoginResponse loginResponse = new LoginResponse(emp.getId(), token);
             return ResponseResult.ok(loginResponse);
         } else {
             return ResponseResult.error(AppHttpCodeEnum.LOGIN_FAILED);
