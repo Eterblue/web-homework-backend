@@ -14,6 +14,7 @@ import io.jsonwebtoken.Jws;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.constraints.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
@@ -37,12 +38,13 @@ public class EmpController {
     public ResponseResult getList(
             String name,
             Integer gender,
-            Long startTime,
-            Long endTime,
+            @DateTimeFormat(pattern = "yyyy-MM-dd") Date startTime,
+            @DateTimeFormat(pattern = "yyyy-MM-dd") Date endTime,
             @NotNull Integer page,
             @NotNull Integer pageSize) {
         return empService.getList(name,gender,startTime,endTime,page,pageSize);
     }
+
 
     @DeleteMapping("/{id}")
     public ResponseResult delete(@PathVariable @NotNull Long id){

@@ -12,7 +12,7 @@
             <result property="gender" column="gender" jdbcType="TINYINT"/>
             <result property="image" column="image" jdbcType="VARCHAR"/>
             <result property="job" column="job" jdbcType="TINYINT"/>
-            <result property="entrydate" column="entrydate" jdbcType="DATE"/>
+            <result property="entrydate" column="entry_date" jdbcType="DATE"/>
             <result property="deptId" column="dept_id" jdbcType="INTEGER"/>
             <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
             <result property="updateTime" column="update_time" jdbcType="TIMESTAMP"/>

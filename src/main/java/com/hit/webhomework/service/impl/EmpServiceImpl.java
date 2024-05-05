@@ -31,15 +31,15 @@ public class EmpServiceImpl extends ServiceImpl<EmpMapper, Emp>
     implements EmpService{
 
     @Override
-    public ResponseResult getList(String name, Integer gender, Long startTime, Long endTime, Integer page, Integer pageSize) {
+    public ResponseResult getList(String name, Integer gender, Date startTime, Date endTime, Integer page, Integer pageSize) {
         LambdaQueryWrapper<Emp> queryWrapper = new LambdaQueryWrapper<>();
         queryWrapper.like(StrUtil.isNotBlank(name), Emp::getName, name)
                 .eq(Objects.nonNull(gender),Emp::getGender, gender);
         if (startTime != null) {
-            queryWrapper.ge(Emp::getCreateTime, new Date(startTime));
+            queryWrapper.ge(Emp::getCreateTime, startTime);
         }
         if (endTime != null) {
-            queryWrapper.le(Emp::getCreateTime, new Date(endTime));
+            queryWrapper.le(Emp::getCreateTime, endTime);
         }
         Page<Emp> page1 = new Page<>(page, pageSize);
         page(page1, queryWrapper);

@@ -14,7 +14,7 @@ import java.util.Date;
 */
 public interface EmpService extends IService<Emp> {
 
-    ResponseResult getList(String name, Integer gender, Long startTime, Long endTime, Integer page, Integer pageSize);
+    ResponseResult getList(String name, Integer gender, Date startTime, Date endTime, Integer page, Integer pageSize);
 
     ResponseResult login(LoginRequest loginRequest);
 }

@@ -1,8 +1,10 @@
 package com.hit.webhomework.domain.request;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.util.Date;
 @Data
@@ -15,6 +17,8 @@ public class AddEmpRequest {
     private Integer gender;
     private String image;
     private Integer job;
-    private Date entrydate;
+    @JsonFormat(pattern = "yyyy-MM-dd")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private Date entryDate;
     private Integer deptId;
 }
