@@ -1,17 +1,13 @@
 package com.hit.webhomework.controller;
 
-import cn.hutool.core.convert.Convert;
 import com.hit.webhomework.domain.ResponseResult;
-import com.hit.webhomework.domain.entity.Dept;
 import com.hit.webhomework.domain.entity.Emp;
 import com.hit.webhomework.domain.request.*;
-import com.hit.webhomework.service.DeptService;
 import com.hit.webhomework.service.EmpService;
 import com.hit.webhomework.utils.BeanCopyUtils;
 import com.hit.webhomework.utils.JwtUtils;
-import io.jsonwebtoken.Claims;
-import io.jsonwebtoken.Jws;
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -19,6 +15,7 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Date;
+import java.util.List;
 
 @RestController
 @RequestMapping("/emp")
@@ -49,6 +46,13 @@ public class EmpController {
     @DeleteMapping("/{id}")
     public ResponseResult delete(@PathVariable @NotNull Long id){
         empService.removeById(id);
+        return ResponseResult.ok();
+    }
+
+
+    @DeleteMapping
+    public ResponseResult deleteBatch(@RequestBody @NotEmpty List<Long> empIds){
+        empService.removeBatchByIds(empIds);
         return ResponseResult.ok();
     }
 
