@@ -12,6 +12,7 @@
             <result property="phone" column="phone" jdbcType="VARCHAR"/>
             <result property="education" column="education" jdbcType="TINYINT"/>
             <result property="illegalTime" column="illegal_time" jdbcType="INTEGER"/>
+            <result property="illegalGrade" column="illegal_grade" jdbcType="INTEGER"/>
             <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
             <result property="updateTime" column="update_time" jdbcType="TIMESTAMP"/>
     </resultMap>

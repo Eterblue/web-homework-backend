@@ -1,5 +1,6 @@
 package com.hit.webhomework.controller;
 
+import com.baomidou.mybatisplus.extension.conditions.query.LambdaQueryChainWrapper;
 import com.hit.webhomework.domain.ResponseResult;
 import com.hit.webhomework.domain.entity.Emp;
 import com.hit.webhomework.domain.request.*;
@@ -73,6 +74,12 @@ public class EmpController {
         Emp emp = BeanCopyUtils.copyBean(updateEmpRequest, Emp.class);
         empService.updateById(emp);
         return ResponseResult.ok();
+    }
+
+    @GetMapping("/htlist")
+    public ResponseResult getHTList(){
+        List<Emp> list = new LambdaQueryChainWrapper<>(empService.getBaseMapper()).eq(Emp::getJob, 1).list();
+        return ResponseResult.ok(list);
     }
 
 }

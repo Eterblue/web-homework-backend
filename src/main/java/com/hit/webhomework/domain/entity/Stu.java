@@ -52,6 +52,8 @@ public class Stu implements Serializable {
      */
     private Integer illegalTime;
 
+    private Integer illegalGrade;
+
     /**
      * 
      */

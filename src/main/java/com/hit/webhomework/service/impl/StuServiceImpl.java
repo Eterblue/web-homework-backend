@@ -1,6 +1,7 @@
 package com.hit.webhomework.service.impl;
 
 import cn.hutool.core.util.StrUtil;
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.conditions.query.LambdaQueryChainWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
@@ -25,14 +26,14 @@ public class StuServiceImpl extends ServiceImpl<StuMapper, Stu>
 
     @Override
     public ResponseResult selectAll(String name, String id, Integer education, Integer clazz, Integer page, Integer pageSize) {
-        LambdaQueryChainWrapper<Stu> queryChainWrapper = new LambdaQueryChainWrapper<>(baseMapper)
+        LambdaQueryWrapper<Stu> queryWrapper = new LambdaQueryWrapper<Stu>()
                 .like(!StrUtil.isBlankIfStr(name), Stu::getName, name)
                 .like(!StrUtil.isBlankIfStr(id), Stu::getId, id)
                 .eq(Objects.nonNull(education), Stu::getEducation, education)
                 .eq(Objects.nonNull(clazz), Stu::getClazz, clazz);
 
         Page<Stu> page1 = new Page<>(page, pageSize);
-        page(page1, queryChainWrapper);
+        page(page1, queryWrapper);
         PageResponse pageResponse = new PageResponse(page1.getRecords(), page1.getTotal());
         return ResponseResult.ok(pageResponse);
     }
