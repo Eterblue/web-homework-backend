@@ -82,4 +82,9 @@ public class EmpController {
         return ResponseResult.ok(list);
     }
 
+    @GetMapping("/listall")
+    public ResponseResult getAllList(){
+        return ResponseResult.ok(empService.list());
+    }
+
 }

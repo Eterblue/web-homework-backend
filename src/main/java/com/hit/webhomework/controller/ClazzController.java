@@ -26,6 +26,10 @@ public class ClazzController {
         return clazzService.getList(name,page,pageSize);
     }
 
+    @GetMapping("/listall")
+    public ResponseResult getAll() {
+        return ResponseResult.ok(clazzService.list());
+    }
 
     @DeleteMapping("/{id}")
     public ResponseResult delete(@PathVariable @NotNull Long id){
