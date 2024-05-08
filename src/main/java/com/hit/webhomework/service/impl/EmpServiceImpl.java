@@ -8,8 +8,7 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.hit.webhomework.domain.ResponseResult;
 import com.hit.webhomework.domain.entity.Emp;
 import com.hit.webhomework.domain.request.LoginRequest;
-import com.hit.webhomework.domain.response.LoginResponse;
-import com.hit.webhomework.domain.response.PageResponse;
+import com.hit.webhomework.domain.response.*;
 import com.hit.webhomework.enums.AppHttpCodeEnum;
 import com.hit.webhomework.service.EmpService;
 import com.hit.webhomework.mapper.EmpMapper;
@@ -60,6 +59,21 @@ public class EmpServiceImpl extends ServiceImpl<EmpMapper, Emp>
         } else {
             return ResponseResult.error(AppHttpCodeEnum.LOGIN_FAILED);
         }
+    }
+
+    @Override
+    public List<EmpJobAggResponse> getAggJob() {
+        return baseMapper.getAggJob();
+    }
+
+    @Override
+    public List<EmpDeptAggResponse> getAggDept() {
+        return baseMapper.getAggDept();
+    }
+
+    @Override
+    public List<EmpGenderAggResponse> getAggGender() {
+        return baseMapper.getAggGender();
     }
 }
 

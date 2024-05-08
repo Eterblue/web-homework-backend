@@ -24,4 +24,14 @@
         job,entrydate,dept_id,
         create_time,update_time
     </sql>
+    <select id="getAggJob" resultType="com.hit.webhomework.domain.response.EmpJobAggResponse">
+        select count(1) as jobCount,job from emp group by job;
+    </select>
+    <select id="getAggGender" resultType="com.hit.webhomework.domain.response.EmpGenderAggResponse">
+        select count(1) as genderCount,gender from emp group by gender;
+    </select>
+    <select id="getAggDept" resultType="com.hit.webhomework.domain.response.EmpDeptAggResponse">
+        select count(1) as deptCount,d.name as deptName from emp e left join dept d on e.dept_id = d.id group by e.dept_id;
+    </select>
+
 </mapper>

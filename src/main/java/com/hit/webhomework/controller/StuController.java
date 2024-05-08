@@ -48,4 +48,13 @@ public class StuController {
         return ResponseResult.ok();
     }
 
+    @GetMapping("/agg/clazz")
+    public ResponseResult getAggClazz(){
+
+    }
+    @GetMapping("/agg/gender")
+    public ResponseResult getAggGender(){
+
+    }
+
 }
