@@ -2,6 +2,8 @@ package com.hit.webhomework.controller;
 
 import com.hit.webhomework.domain.ResponseResult;
 import com.hit.webhomework.domain.entity.Stu;
+import com.hit.webhomework.domain.response.StuClazzAggResponse;
+import com.hit.webhomework.domain.response.StuGenderAggResponse;
 import com.hit.webhomework.service.StuService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -50,11 +52,13 @@ public class StuController {
 
     @GetMapping("/agg/clazz")
     public ResponseResult getAggClazz(){
-
+        List<StuClazzAggResponse> stuClazzAggResponses = stuService.getAggClazz();
+        return ResponseResult.ok(stuClazzAggResponses);
     }
     @GetMapping("/agg/gender")
     public ResponseResult getAggGender(){
-
+        List<StuGenderAggResponse> stuGenderAggResponses = stuService.getAggGender();
+        return ResponseResult.ok(stuGenderAggResponses);
     }
 
 }

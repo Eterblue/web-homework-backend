@@ -22,4 +22,10 @@
         gender,phone,education,
         illegal_time,create_time,update_time
     </sql>
+    <select id="getAggGender" resultType="com.hit.webhomework.domain.response.StuGenderAggResponse">
+        select count(1) as genderCount,gender from stu group by gender;
+    </select>
+    <select id="getAggClazz" resultType="com.hit.webhomework.domain.response.StuClazzAggResponse">
+        select count(1) as clazzCount,c.name as clazzName from stu s left join clazz c on s.clazz = c.id group by s.clazz;
+    </select>
 </mapper>

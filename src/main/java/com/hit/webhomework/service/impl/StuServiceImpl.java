@@ -8,10 +8,13 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.hit.webhomework.domain.ResponseResult;
 import com.hit.webhomework.domain.entity.Stu;
 import com.hit.webhomework.domain.response.PageResponse;
+import com.hit.webhomework.domain.response.StuClazzAggResponse;
+import com.hit.webhomework.domain.response.StuGenderAggResponse;
 import com.hit.webhomework.service.StuService;
 import com.hit.webhomework.mapper.StuMapper;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Objects;
 
 /**
@@ -36,6 +39,16 @@ public class StuServiceImpl extends ServiceImpl<StuMapper, Stu>
         page(page1, queryWrapper);
         PageResponse pageResponse = new PageResponse(page1.getRecords(), page1.getTotal());
         return ResponseResult.ok(pageResponse);
+    }
+
+    @Override
+    public List<StuClazzAggResponse> getAggClazz() {
+        return baseMapper.getAggClazz();
+    }
+
+    @Override
+    public List<StuGenderAggResponse> getAggGender() {
+        return baseMapper.getAggGender();
     }
 }
 

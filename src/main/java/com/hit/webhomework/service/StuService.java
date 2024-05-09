@@ -3,6 +3,10 @@ package com.hit.webhomework.service;
 import com.hit.webhomework.domain.ResponseResult;
 import com.hit.webhomework.domain.entity.Stu;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.hit.webhomework.domain.response.StuClazzAggResponse;
+import com.hit.webhomework.domain.response.StuGenderAggResponse;
+
+import java.util.List;
 
 /**
 * @author sardinary
@@ -16,4 +20,8 @@ public interface StuService extends IService<Stu> {
                                     Integer clazz,
                                     Integer page,
                                     Integer pageSize);
+
+    List<StuClazzAggResponse> getAggClazz();
+
+    List<StuGenderAggResponse> getAggGender();
 }

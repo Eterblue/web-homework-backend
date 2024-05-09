@@ -2,7 +2,11 @@ package com.hit.webhomework.mapper;
 
 import com.hit.webhomework.domain.entity.Stu;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.hit.webhomework.domain.response.StuClazzAggResponse;
+import com.hit.webhomework.domain.response.StuGenderAggResponse;
 import org.apache.ibatis.annotations.Mapper;
+
+import java.util.List;
 
 /**
 * @author sardinary
@@ -13,6 +17,9 @@ import org.apache.ibatis.annotations.Mapper;
 @Mapper
 public interface StuMapper extends BaseMapper<Stu> {
 
+    List<StuClazzAggResponse> getAggClazz();
+
+    List<StuGenderAggResponse> getAggGender();
 }
 
 
