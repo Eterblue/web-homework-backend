@@ -40,7 +40,7 @@ public class StuController {
     }
 
     @GetMapping("/{id}")
-    public ResponseResult getStu(@PathVariable Long id){
+    public ResponseResult getStu(@PathVariable String id){
         return ResponseResult.ok(stuService.getById(id));
     }
 

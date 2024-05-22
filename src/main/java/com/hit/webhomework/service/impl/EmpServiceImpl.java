@@ -35,10 +35,10 @@ public class EmpServiceImpl extends ServiceImpl<EmpMapper, Emp>
         queryWrapper.like(StrUtil.isNotBlank(name), Emp::getName, name)
                 .eq(Objects.nonNull(gender),Emp::getGender, gender);
         if (startTime != null) {
-            queryWrapper.ge(Emp::getCreateTime, startTime);
+            queryWrapper.ge(Emp::getEntryDate, startTime);
         }
         if (endTime != null) {
-            queryWrapper.le(Emp::getCreateTime, endTime);
+            queryWrapper.le(Emp::getEntryDate, endTime);
         }
         Page<Emp> page1 = new Page<>(page, pageSize);
         page(page1, queryWrapper);
